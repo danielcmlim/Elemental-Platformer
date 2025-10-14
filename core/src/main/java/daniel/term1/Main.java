@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Main implements ApplicationListener {
 
     private Texture[] tiles;
-    private Texture floor_tile, door_closed, door_opened, barrel, box, chest_closed, chain_forward, chain_reverse, spikes, death_sign;
+    private Texture floor_tile, door_closed, door_opened, barrel, box, air_chest_closed, chain_forward, chain_reverse, spikes, death_sign;
     private SpriteBatch batch;
     private Music music;
 
@@ -35,7 +35,7 @@ public class Main implements ApplicationListener {
 
         barrel = new Texture("barrel.png");
         box = new Texture("box.png");
-        chest_closed = new Texture("chest_closed.png");
+        air_chest_closed = new Texture("air_chest_closed.png");
 
         chain_reverse = new Texture("chain_reverse.png");
         chain_forward = new Texture("chain_forward.png");
@@ -73,8 +73,6 @@ public class Main implements ApplicationListener {
             int topY = (rows - 1) * tileSize - 6;
             batch.draw(floor_tile, col * tileSize, topY);
         }
-
-
 
 
         // Floor 1
@@ -120,10 +118,13 @@ public class Main implements ApplicationListener {
         // Objects
         int door_scale = 2, barrel_scale = 2, box_scale = 4, chest_scale = 2, chain_scale = 2;
 
+        //------------------------------DOORS--------------------------
         batch.draw(door_closed, 10, 7, door_closed.getWidth() * door_scale, door_closed.getHeight() * door_scale);
         batch.draw(door_opened, 1224, 501, door_opened.getWidth() * door_scale, door_opened.getHeight() * door_scale);
+
         batch.draw(barrel, 450, 10, barrel.getWidth() * barrel_scale, barrel.getHeight() * barrel_scale);
         batch.draw(box, 1330, -15, box.getWidth() * box_scale, box.getHeight() * box_scale);
+        batch.draw(air_chest_closed,-400,92,air_chest_closed.getWidth() * chest_scale, air_chest_closed.getHeight() * chest_scale);
 
         // ---------------------CHAINS-------------------------------
         batch.draw(chain_reverse, 627, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
