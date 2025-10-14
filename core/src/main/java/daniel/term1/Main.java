@@ -101,7 +101,7 @@ public class Main implements ApplicationListener {
         int ramp3a_startX = 436, ramp3a_startY = 494;
         float ramp3a_vSpacing = floor_tile.getHeight() / 3f;
         float ramp3a_hSpacing = floor_tile.getWidth() / 2f;
-        for (int i = 0; i < ramp2a_steps; i++)
+        for (int i = 0; i < ramp3a_steps; i++)
             batch.draw(floor_tile, ramp3a_startX + i * ramp3a_hSpacing, ramp3a_startY - i * ramp3a_vSpacing);
 
         int floor3b_X = 674, floor3b_Y = 350;
