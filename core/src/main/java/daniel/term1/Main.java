@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Main implements ApplicationListener {
 
     private Texture[] tiles;
-    private Texture floor_tile, door_closed, door_opened, barrel, box, air_chest_closed, chain_forward, chain_reverse, spikes, death_sign;
+    private Texture floor_tile, door_closed, door_opened, barrel, box, air_chest_closed, chain_forward, chain_reverse, spikes,spikes_roof,spikes_right,spikes_left, death_sign;
     private SpriteBatch batch;
     private Music music;
 
@@ -41,6 +41,9 @@ public class Main implements ApplicationListener {
         chain_forward = new Texture("chain_forward.png");
 
         spikes = new Texture("spikes.png");
+        spikes_roof = new Texture("spikes_roof.png");
+        spikes_left = new Texture("spikes_left.png");
+        spikes_right = new Texture("spikes_right.png");
         death_sign = new Texture("death_sign.png");
 
         int tileSize = tiles[0].getWidth();
@@ -127,12 +130,13 @@ public class Main implements ApplicationListener {
         batch.draw(air_chest_closed,-400,92,air_chest_closed.getWidth() * chest_scale, air_chest_closed.getHeight() * chest_scale);
 
         // ---------------------CHAINS-------------------------------
+        //Floor 4 platform 1
         batch.draw(chain_reverse, 627, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
         batch.draw(chain_forward, 629, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
-
+        //Floor 4 platform 2
         batch.draw(chain_reverse, 734, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
         batch.draw(chain_forward, 736, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
-
+        //Floor 4 platform 3
         batch.draw(chain_reverse, 904, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
         batch.draw(chain_forward, 906, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
 
@@ -149,13 +153,16 @@ public class Main implements ApplicationListener {
         float spikes_scale = 0.5f;
 
         //Floor Spikes
-        int startX = 676;
-        int y = 14;
-        int spacing = 200;
-        int spikeCount = 4;
-
-        for (int i = 0; i < spikeCount; i++) {
-            batch.draw(spikes, startX + i * spacing, y, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
+        for (int i = 0; i < 4; i++) {
+            batch.draw(spikes, 676 + i * 200, 14, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
+        }
+        //Roof Spikes
+        for (int i = 0; i < 4; i++) {
+            batch.draw(spikes_roof, 676 + i * 200, 168, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
+        }
+        //Right Spikes
+        for(int i = 0; i < 6; i++){
+            batch.draw(spikes_right,0,380+i*50,spikes.getHeight() * spikes_scale,spikes.getWidth() * spikes_scale);
         }
 
         //Spiek Pit
@@ -168,13 +175,9 @@ public class Main implements ApplicationListener {
             spike_pitX += spikeWidth;
         }
 
-
         //---------------------------SIGNS---------------------
         batch.draw(death_sign, 715, 508, 60, 60);
         batch.draw(death_sign, 990, 508, 60, 60);
-
-
-
 
         batch.end();
     }
@@ -192,7 +195,6 @@ public class Main implements ApplicationListener {
         chain_reverse.dispose();
         spikes.dispose();
         death_sign.dispose();
-//        chest_closed.dispose();
         music.dispose();
     }
 
