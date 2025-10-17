@@ -12,9 +12,11 @@ public class LevelGenerator {
     private int[][] tileMap;
     private int cols, rows;
 
+    private int currentLevel = 1; // ← track which level we’re on
+
     public LevelGenerator() {
         loadTextures();
-        generateLevel1(); // Current level setup
+        generateLevel1();
     }
 
     private void loadTextures() {
@@ -41,6 +43,7 @@ public class LevelGenerator {
         death_sign = new Texture("death_sign.png");
     }
 
+    // 🌍 Create Level 1 layout data
     public void generateLevel1() {
         int tileSize = tiles[0].getWidth();
         cols = Gdx.graphics.getWidth() / tileSize + 1;
@@ -50,6 +53,8 @@ public class LevelGenerator {
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < cols; col++)
                 tileMap[row][col] = (int)(Math.random() * tiles.length);
+
+        currentLevel = 1;
     }
 
     public void render(SpriteBatch batch) {
@@ -59,6 +64,16 @@ public class LevelGenerator {
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < cols; col++)
                 batch.draw(tiles[tileMap[row][col]], col * tileSize, row * tileSize);
+
+        // --- Draw the current level layout ---
+        if (currentLevel == 1)
+            drawLevel1(batch);
+        // else if (currentLevel == 2) drawLevel2(batch);
+    }
+
+    // 🎮 Draw all the platforms, ramps, and objects for Level 1
+    private void drawLevel1(SpriteBatch batch) {
+        int tileSize = tiles[0].getWidth();
 
         // --- Floors ---
         for (int col = 0; col < cols; col++) {
@@ -112,7 +127,6 @@ public class LevelGenerator {
 
         batch.draw(door_closed, 10, 7, door_closed.getWidth() * door_scale, door_closed.getHeight() * door_scale);
         batch.draw(door_opened, 1224, 501, door_opened.getWidth() * door_scale, door_opened.getHeight() * door_scale);
-
         batch.draw(barrel, 450, 10, barrel.getWidth() * barrel_scale, barrel.getHeight() * barrel_scale);
         batch.draw(box, 1330, -15, box.getWidth() * box_scale, box.getHeight() * box_scale);
         batch.draw(air_chest_closed,-400,92,air_chest_closed.getWidth() * chest_scale, air_chest_closed.getHeight() * chest_scale);
@@ -124,18 +138,11 @@ public class LevelGenerator {
         batch.draw(chain_forward, 736, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
         batch.draw(chain_reverse, 904, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
         batch.draw(chain_forward, 906, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 1011, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 1013, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 1144, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 1146, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 1298, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 1301, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
 
         // --- Spikes ---
         float spikes_scale = 0.5f;
         for (int i = 0; i < 4; i++) batch.draw(spikes, 676 + i * 200, 14, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
         for (int i = 0; i < 4; i++) batch.draw(spikes_roof, 676 + i * 200, 168, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
-        for(int i = 0; i < 6; i++) batch.draw(spikes_right,0,380+i*50,spikes.getHeight() * spikes_scale,spikes.getWidth() * spikes_scale);
 
         float spike_pitX = 674;
         float spike_pitY = 362;
