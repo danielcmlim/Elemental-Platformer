@@ -138,7 +138,12 @@ public class LevelGenerator {
         batch.draw(chain_forward, 736, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
         batch.draw(chain_reverse, 904, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
         batch.draw(chain_forward, 906, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
-
+        batch.draw(chain_reverse, 1011, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
+        batch.draw(chain_forward, 1013, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
+        batch.draw(chain_reverse, 1144, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
+        batch.draw(chain_forward, 1146, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
+        batch.draw(chain_reverse, 1298, 499, chain_reverse.getHeight()*chain_scale, chain_reverse.getHeight() * chain_scale);
+        batch.draw(chain_forward, 1301, 597, chain_forward.getHeight()*chain_scale, chain_forward.getHeight() * chain_scale);
         // --- Spikes ---
         float spikes_scale = 0.5f;
         for (int i = 0; i < 4; i++) batch.draw(spikes, 676 + i * 200, 14, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
