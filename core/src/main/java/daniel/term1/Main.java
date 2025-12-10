@@ -5,19 +5,27 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.math.Vector2;
 
 public class Main implements ApplicationListener {
 
+    public static final float PPM = 100f; // pixels per meter
     private SpriteBatch batch;
     private Music music;
     private LevelGenerator level;
     private Player player;
+    private World world;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        level = new LevelGenerator();
-        player = new Player();
+        world = new World(new Vector2(0, -10f), true);
+
+        level = new LevelGenerator(world);
+        float spawnX = 10 + 32;
+        float spawnY = 140 + 32;
+        player = new Player(world, spawnX, spawnY);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("Audio/castle_music.mp3"));
         music.setLooping(true);
@@ -27,11 +35,13 @@ public class Main implements ApplicationListener {
 
     @Override
     public void render() {
+        float delta = Gdx.graphics.getDeltaTime();
+
+        world.step(delta, 6, 2); // Box2D physics step
+        player.update(delta);
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        float delta = Gdx.graphics.getDeltaTime();
-        player.update(delta);
 
         batch.begin();
         level.render(batch);
@@ -43,8 +53,8 @@ public class Main implements ApplicationListener {
     public void dispose() {
         batch.dispose();
         level.dispose();
-        player.dispose();
         music.dispose();
+        world.dispose();
     }
 
     @Override public void resize(int width, int height) {}

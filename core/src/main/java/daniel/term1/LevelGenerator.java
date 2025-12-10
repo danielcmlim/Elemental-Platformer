@@ -3,6 +3,8 @@ package daniel.term1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class LevelGenerator {
 
@@ -11,17 +13,19 @@ public class LevelGenerator {
     private Texture door_closed, door_opened, barrel, box, air_chest_closed;
     private Texture chain_forward, chain_reverse, spikes, spikes_roof, spikes_right, spikes_left, death_sign;
 
-    private int[][] tileMap;
     private int cols, rows;
     private int currentLevel = 1;
 
-    public LevelGenerator() {
+    private World world;
+
+    public LevelGenerator(World world) {
+        this.world = world;
         loadTextures();
         generateLevel1();
+        createWorldBorders();   // <<< ADD BORDER WALLS
     }
 
     private void loadTextures() {
-        // 🧱 Background tiles
         tiles = new Texture[] {
             new Texture(Gdx.files.internal("Background_Tiles/background_tile1.png")),
             new Texture(Gdx.files.internal("Background_Tiles/background_tile2.png")),
@@ -31,8 +35,6 @@ public class LevelGenerator {
         };
 
         floor_tile = new Texture(Gdx.files.internal("Background_Tiles/red_brick.png"));
-
-        // 🎯 Objects
         door_closed = new Texture(Gdx.files.internal("Objects/door_closed.png"));
         door_opened = new Texture(Gdx.files.internal("Objects/door_opened.png"));
         barrel = new Texture(Gdx.files.internal("Objects/barrel.png"));
@@ -47,129 +49,206 @@ public class LevelGenerator {
         death_sign = new Texture(Gdx.files.internal("Objects/death_sign.png"));
     }
 
-    public void generateLevel1() {
+    public void render(SpriteBatch batch) {
+
         int tileSize = tiles[0].getWidth();
-        cols = Gdx.graphics.getWidth() / tileSize + 1;
+        cols = Gdx.graphics.getWidth() / tileSize + 2;
         rows = Gdx.graphics.getHeight() / tileSize + 1;
 
-        tileMap = new int[rows][cols];
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < cols; col++)
-                tileMap[row][col] = (int)(Math.random() * tiles.length);
-
-        currentLevel = 1;
-    }
-
-    public void render(SpriteBatch batch) {
-        int tileSize = tiles[0].getWidth();
-
-        // --- Background ---
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-                batch.draw(tiles[tileMap[row][col]], col * tileSize, row * tileSize);
+                batch.draw(tiles[(row + col) % tiles.length], col * tileSize, row * tileSize);
 
         if (currentLevel == 1)
             drawLevel1(batch);
     }
 
-    // 🎮 Draw all the platforms, ramps, and objects for Level 1
+    private void generateLevel1() {
+        currentLevel = 1;
+    }
+
     private void drawLevel1(SpriteBatch batch) {
-        int tileSize = tiles[0].getWidth();
+        int tileW = floor_tile.getWidth();
+        int tileH = floor_tile.getHeight();
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
 
-        // --- Floors (base and ceiling) ---
-        for (int col = 0; col < cols; col++) {
-            batch.draw(floor_tile, col * tileSize, 0);
-            int topY = (rows - 1) * tileSize - 6;
-            batch.draw(floor_tile, col * tileSize, topY);
-        }
+        // ----- FLOOR -----
+        for (int x = 0; x < screenWidth; x += tileW)
+            batch.draw(floor_tile, x, 0);
+        createMergedPlatform(0, 0, screenWidth, tileH);
 
-        // --- Custom Floors and Platforms ---
-        // Floor 1
-        int floor1_X = 0, floor1_Y = 140;
-        for (int i = 0; i < 8; i++) batch.draw(floor_tile, floor1_X + i * tileSize, floor1_Y);
+        // ----- CEILING -----
+        float ceilingY = screenHeight - tileH;
+        for (int x = 0; x < screenWidth; x += tileW)
+            batch.draw(floor_tile, x, ceilingY);
+        createMergedPlatform(0, ceilingY, screenWidth, tileH);
 
-        // Floor 2 (left)
-        int floor2a_X = 0, floor2a_Y = 344;
-        for (int i = 0; i < 8; i++) batch.draw(floor_tile, floor2a_X + i * tileSize, floor2a_Y);
+        // ----- PLATFORMS -----
+        drawMergedPlatform(batch, 0, 140, tileW * 8);
+        drawMergedPlatform(batch, 0, 344, tileW * 8);
 
-        // Ramp 2A (ascending right)
-        int ramp2a_steps = 10;
-        int ramp2a_startX = 336, ramp2a_startY = 344;
-        float ramp2a_vSpacing = floor_tile.getHeight() / 3f;
-        float ramp2a_hSpacing = floor_tile.getWidth() / 2f;
-        for (int i = 0; i < ramp2a_steps; i++)
-            batch.draw(floor_tile, ramp2a_startX + i * ramp2a_hSpacing, ramp2a_startY - i * ramp2a_vSpacing);
+        drawMergedRamp(batch, 336, 344, 10, true);
 
-        // Floor 2B (right)
-        int floor2b_X = 574, floor2b_Y = 200;
-        for (int i = 0; i < 16; i++) batch.draw(floor_tile, floor2b_X + i * tileSize, floor2b_Y);
+        drawMergedPlatform(batch, 574, 200, tileW * 16);
+        drawMergedPlatform(batch, 100, 494, tileW * 8);
 
-        // Floor 3 (upper section)
-        int floor3a_X = 100, floor3a_Y = 494;
-        for (int i = 0; i < 8; i++) batch.draw(floor_tile, floor3a_X + i * tileSize, floor3a_Y);
+        drawMergedRamp(batch, 436, 494, 10, true);
 
-        // Ramp 3A
-        int ramp3a_steps = 10;
-        int ramp3a_startX = 436, ramp3a_startY = 494;
-        float ramp3a_vSpacing = floor_tile.getHeight() / 3f;
-        float ramp3a_hSpacing = floor_tile.getWidth() / 2f;
-        for (int i = 0; i < ramp3a_steps; i++)
-            batch.draw(floor_tile, ramp3a_startX + i * ramp3a_hSpacing, ramp3a_startY - i * ramp3a_vSpacing);
+        drawMergedPlatform(batch, 674, 350, tileW * 16);
+        drawMergedPlatform(batch, 674, 494, tileW * 3);
+        drawMergedPlatform(batch, 950, 494, tileW * 3);
+        drawMergedPlatform(batch, 1190, 494, tileW * 4);
 
-        int floor3b_X = 674, floor3b_Y = 350;
-        for (int i = 0; i < 16; i++) batch.draw(floor_tile, floor3b_X + i * tileSize, floor3b_Y);
-
-        // Floor 4 (top right area)
-        int floor4a_X = 674, floor4a_Y = 494;
-        for (int i = 0; i < 3; i++) batch.draw(floor_tile, floor4a_X + i * tileSize, floor4a_Y);
-        int floor4b_X = 950, floor4b_Y = 494;
-        for (int i = 0; i < 3; i++) batch.draw(floor_tile, floor4b_X + i * tileSize, floor4b_Y);
-        int floor4c_X = 1190, floor4c_Y = 494;
-        for (int i = 0; i < 4; i++) batch.draw(floor_tile, floor4c_X + i * tileSize, floor4c_Y);
-
-        // --- Objects ---
+        // ----- OBJECTS -----
         int door_scale = 2, barrel_scale = 2, box_scale = 4, chest_scale = 2, chain_scale = 2;
 
-        // Doors and chests
-        batch.draw(door_closed, 10, 7, door_closed.getWidth() * door_scale, door_closed.getHeight() * door_scale);
-        batch.draw(door_opened, 1224, 501, door_opened.getWidth() * door_scale, door_opened.getHeight() * door_scale);
-        batch.draw(barrel, 450, 10, barrel.getWidth() * barrel_scale, barrel.getHeight() * barrel_scale);
-        batch.draw(box, 1330, -15, box.getWidth() * box_scale, box.getHeight() * box_scale);
-        batch.draw(air_chest_closed, -400, 92, air_chest_closed.getWidth() * chest_scale, air_chest_closed.getHeight() * chest_scale);
+        batch.draw(door_closed, 10, 7,
+            door_closed.getWidth() * door_scale,
+            door_closed.getHeight() * door_scale);
 
-        // Chains
-        batch.draw(chain_reverse, 627, 499, chain_reverse.getHeight() * chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 629, 597, chain_forward.getHeight() * chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 734, 499, chain_reverse.getHeight() * chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 736, 597, chain_forward.getHeight() * chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 904, 499, chain_reverse.getHeight() * chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 906, 597, chain_forward.getHeight() * chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 1011, 499, chain_reverse.getHeight() * chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 1013, 597, chain_forward.getHeight() * chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 1144, 499, chain_reverse.getHeight() * chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 1146, 597, chain_forward.getHeight() * chain_scale, chain_forward.getHeight() * chain_scale);
-        batch.draw(chain_reverse, 1298, 499, chain_reverse.getHeight() * chain_scale, chain_reverse.getHeight() * chain_scale);
-        batch.draw(chain_forward, 1301, 597, chain_forward.getHeight() * chain_scale, chain_forward.getHeight() * chain_scale);
+        batch.draw(door_opened, 1224, 501,
+            door_opened.getWidth() * door_scale,
+            door_opened.getHeight() * door_scale);
 
-        // --- Spikes ---
-        float spikes_scale = 0.5f;
-        for (int i = 0; i < 4; i++)
-            batch.draw(spikes, 676 + i * 200, 14, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
-        for (int i = 0; i < 4; i++)
-            batch.draw(spikes_roof, 676 + i * 200, 168, spikes.getWidth() * spikes_scale, spikes.getHeight() * spikes_scale);
+        batch.draw(barrel, 450, 10,
+            barrel.getWidth() * barrel_scale,
+            barrel.getHeight() * barrel_scale);
 
-        // Spike pit
-        float spike_pitX = 674;
-        float spike_pitY = 362;
-        float spikeWidth = spikes.getWidth() * spikes_scale;
-        while (spike_pitX < Gdx.graphics.getWidth()) {
-            batch.draw(spikes, spike_pitX, spike_pitY, spikeWidth, spikes.getHeight() * spikes_scale);
-            spike_pitX += spikeWidth;
+        batch.draw(box, 1330, -15,
+            box.getWidth() * box_scale,
+            box.getHeight() * box_scale);
+
+        batch.draw(air_chest_closed, -400, 92,
+            air_chest_closed.getWidth() * chest_scale,
+            air_chest_closed.getHeight() * chest_scale);
+
+        // ----- CHAINS -----
+        int[] chainXs = {627, 734, 904, 1011, 1144, 1298};
+        for (int x : chainXs) {
+            batch.draw(chain_reverse, x, 499,
+                chain_reverse.getHeight() * chain_scale,
+                chain_reverse.getHeight() * chain_scale);
+            batch.draw(chain_forward, x + 2, 597,
+                chain_forward.getHeight() * chain_scale,
+                chain_forward.getHeight() * chain_scale);
         }
 
-        // --- Signs ---
+        // ----- SPIKES -----
+        float s = 0.5f;
+
+        for (int i = 0; i < 4; i++)
+            batch.draw(spikes, 676 + i * 200, 14, spikes.getWidth() * s, spikes.getHeight() * s);
+
+        for (int i = 0; i < 4; i++)
+            batch.draw(spikes_roof, 676 + i * 200, 168, spikes.getWidth() * s, spikes.getHeight() * s);
+
+        float pitX = 674;
+        float pitY = 362;
+        float spikeW = spikes.getWidth() * s;
+
+        while (pitX < screenWidth) {
+            batch.draw(spikes, pitX, pitY, spikeW, spikes.getHeight() * s);
+            pitX += spikeW;
+        }
+
         batch.draw(death_sign, 715, 508, 60, 60);
         batch.draw(death_sign, 990, 508, 60, 60);
+    }
+
+    // ---- PLATFORM ----
+    private void drawMergedPlatform(SpriteBatch batch, float x, float y, float width) {
+        for (float px = x; px < x + width; px += floor_tile.getWidth())
+            batch.draw(floor_tile, px, y);
+
+        createMergedPlatform(x, y, width, floor_tile.getHeight());
+    }
+
+    private void createMergedPlatform(float x, float y, float width, float height) {
+
+        BodyDef bd = new BodyDef();
+        bd.type = BodyDef.BodyType.StaticBody;
+
+        float centerX = x + width / 2f;
+        float centerY = y + height / 2f;
+        bd.position.set(centerX / Main.PPM, centerY / Main.PPM);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width / 2f / Main.PPM, height / 2f / Main.PPM);
+
+        Body body = world.createBody(bd);
+        Fixture f = body.createFixture(shape, 1);
+        f.setUserData("platform");
+
+        shape.dispose();
+    }
+
+    // ---- RAMP ----
+    private void drawMergedRamp(SpriteBatch batch, float startX, float startY, int steps, boolean ascending) {
+
+        float hSpacing = floor_tile.getWidth() / 2f;
+        float vSpacing = floor_tile.getHeight() / 3f;
+
+        float endX = startX + steps * hSpacing;
+        float endY = startY + (ascending ? -steps * vSpacing : steps * vSpacing);
+
+        for (int i = 0; i < steps; i++) {
+            float x = startX + i * hSpacing;
+            float y = startY + (ascending ? -i * vSpacing : i * vSpacing);
+            batch.draw(floor_tile, x, y);
+        }
+
+        createRampBody(startX, startY, endX, endY);
+    }
+
+    private void createRampBody(float x1, float y1, float x2, float y2) {
+
+        BodyDef bd = new BodyDef();
+        bd.type = BodyDef.BodyType.StaticBody;
+        bd.position.set(0, 0);
+
+        Body body = world.createBody(bd);
+
+        EdgeShape edge = new EdgeShape();
+        edge.set(
+            new Vector2(x1 / Main.PPM, y1 / Main.PPM),
+            new Vector2(x2 / Main.PPM, y2 / Main.PPM)
+        );
+
+        Fixture f = body.createFixture(edge, 1);
+        f.setUserData("platform");
+
+        edge.dispose();
+    }
+
+    // ---- WORLD BORDERS ----
+    private void createWorldBorders() {
+
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
+        float thickness = 50;
+
+        // LEFT WALL
+        BodyDef leftBd = new BodyDef();
+        leftBd.type = BodyDef.BodyType.StaticBody;
+        leftBd.position.set((-thickness / 2f) / Main.PPM, screenHeight / 2f / Main.PPM);
+
+        PolygonShape leftShape = new PolygonShape();
+        leftShape.setAsBox(thickness / 2f / Main.PPM, screenHeight / 2f / Main.PPM);
+
+        world.createBody(leftBd).createFixture(leftShape, 0).setUserData("border");
+        leftShape.dispose();
+
+        // RIGHT WALL
+        BodyDef rightBd = new BodyDef();
+        rightBd.type = BodyDef.BodyType.StaticBody;
+        rightBd.position.set((screenWidth + thickness / 2f) / Main.PPM, screenHeight / 2f / Main.PPM);
+
+        PolygonShape rightShape = new PolygonShape();
+        rightShape.setAsBox(thickness / 2f / Main.PPM, screenHeight / 2f / Main.PPM);
+
+        world.createBody(rightBd).createFixture(rightShape, 0).setUserData("border");
+        rightShape.dispose();
     }
 
     public void dispose() {
