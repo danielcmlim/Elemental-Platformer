@@ -22,7 +22,7 @@ public class LevelGenerator {
         this.world = world;
         loadTextures();
         generateLevel1();
-        createWorldBorders();   // <<< ADD BORDER WALLS
+        createWorldBorders();
     }
 
     private void loadTextures() {
@@ -137,23 +137,55 @@ public class LevelGenerator {
         // ----- SPIKES -----
         float s = 0.5f;
 
-        for (int i = 0; i < 4; i++)
-            batch.draw(spikes, 676 + i * 200, 14, spikes.getWidth() * s, spikes.getHeight() * s);
+        // Platform spikes (bottom)
+        for (int i = 0; i < 4; i++) {
+            float spikeX = 676 + i * 200;
+            float spikeY = 14;
+            batch.draw(spikes, spikeX, spikeY, spikes.getWidth() * s, spikes.getHeight() * s);
+            createSpikeBody(spikeX, spikeY, spikes.getWidth() * s, spikes.getHeight() * s);
+        }
 
-        for (int i = 0; i < 4; i++)
-            batch.draw(spikes_roof, 676 + i * 200, 168, spikes.getWidth() * s, spikes.getHeight() * s);
+        // Platform spikes (roof)
+        for (int i = 0; i < 4; i++) {
+            float spikeX = 676 + i * 200;
+            float spikeY = 168;
+            batch.draw(spikes_roof, spikeX, spikeY, spikes.getWidth() * s, spikes.getHeight() * s);
+            createSpikeBody(spikeX, spikeY, spikes.getWidth() * s, spikes.getHeight() * s);
+        }
 
+        // Pit spikes
         float pitX = 674;
         float pitY = 362;
         float spikeW = spikes.getWidth() * s;
 
         while (pitX < screenWidth) {
             batch.draw(spikes, pitX, pitY, spikeW, spikes.getHeight() * s);
+            createSpikeBody(pitX, pitY, spikeW, spikes.getHeight() * s);
             pitX += spikeW;
         }
 
         batch.draw(death_sign, 715, 508, 60, 60);
         batch.draw(death_sign, 990, 508, 60, 60);
+    }
+
+    // ---- SPIKE BODY ----
+    private void createSpikeBody(float x, float y, float width, float height) {
+        BodyDef bd = new BodyDef();
+        bd.type = BodyDef.BodyType.StaticBody;
+
+        float centerX = x + width / 2f;
+        float centerY = y + height / 2f;
+        bd.position.set(centerX / Main.PPM, centerY / Main.PPM);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width / 2f / Main.PPM, height / 2f / Main.PPM);
+
+        Body body = world.createBody(bd);
+        Fixture f = body.createFixture(shape, 0);
+        f.setUserData("spike"); // Mark as spike for collision detection
+        f.setSensor(true); // Make it a sensor so it doesn't push the player
+
+        shape.dispose();
     }
 
     // ---- PLATFORM ----

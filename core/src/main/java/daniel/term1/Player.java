@@ -14,17 +14,19 @@ public class Player {
     private World world;
     private Body body;
 
-    private Texture idleSheet, runSheet, jumpSheet;
-    private Animation<TextureRegion> idleAnim, runAnim, jumpAnim;
+    private Texture idleSheet, runSheet, jumpSheet, deadSheet;
+    private Animation<TextureRegion> idleAnim, runAnim, jumpAnim, deadAnim;
 
     private TextureRegion currentFrame;
     private float stateTime = 0;
+    private float deathTime = 0;
 
     private float width = 38;     // sprite pixel width
     private float height = 67;    // sprite pixel height
 
     private boolean isJumping = false;
     private boolean facingRight = true;
+    private boolean isDead = false;
 
     public Player(World world, float spawnX, float spawnY) {
         this.world = world;
@@ -38,12 +40,14 @@ public class Player {
         idleSheet = new Texture(Gdx.files.internal("player/Idle.png"));
         runSheet = new Texture(Gdx.files.internal("player/Run.png"));
         jumpSheet = new Texture(Gdx.files.internal("player/Jump.png"));
+        deadSheet = new Texture(Gdx.files.internal("player/Dead.png"));
     }
 
-        private void createAnimations() {
+    private void createAnimations() {
         int idleFrames = 7;
         int runFrames = 8;
         int jumpFrames = 9;
+        int deadFrames = 6;
 
         int frameW = idleSheet.getWidth() / idleFrames;
         int frameH = idleSheet.getHeight();
@@ -51,14 +55,17 @@ public class Player {
         TextureRegion[][] idleCut = TextureRegion.split(idleSheet, frameW, frameH);
         TextureRegion[][] runCut = TextureRegion.split(runSheet, runSheet.getWidth() / runFrames, runSheet.getHeight());
         TextureRegion[][] jumpCut = TextureRegion.split(jumpSheet, jumpSheet.getWidth() / jumpFrames, jumpSheet.getHeight());
+        TextureRegion[][] deadCut = TextureRegion.split(deadSheet, deadSheet.getWidth() / deadFrames, deadSheet.getHeight());
 
         idleAnim = new Animation<>(0.1f, idleCut[0]);
         runAnim = new Animation<>(0.07f, runCut[0]);
         jumpAnim = new Animation<>(0.12f, jumpCut[0]);
+        deadAnim = new Animation<>(0.1f, deadCut[0]);
 
         idleAnim.setPlayMode(Animation.PlayMode.LOOP);
         runAnim.setPlayMode(Animation.PlayMode.LOOP);
         jumpAnim.setPlayMode(Animation.PlayMode.LOOP);
+        deadAnim.setPlayMode(Animation.PlayMode.NORMAL); // Play once, don't loop
     }
 
     private void createBody(float spawnX, float spawnY) {
@@ -83,6 +90,16 @@ public class Player {
 
     public void update(float dt) {
         stateTime += dt;
+
+        if (isDead) {
+            deathTime += dt;
+            // Stop the player from moving
+            body.setLinearVelocity(0, 0);
+            // Play death animation
+            currentFrame = deadAnim.getKeyFrame(deathTime);
+            return;
+        }
+
         float moveSpeed = 4f;
         Vector2 vel = body.getLinearVelocity();
         Vector2 pos = body.getPosition();
@@ -129,9 +146,18 @@ public class Player {
         }
     }
 
+    public void die() {
+        isDead = true;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
     public void dispose() {
         idleSheet.dispose();
         runSheet.dispose();
         jumpSheet.dispose();
+        deadSheet.dispose();
     }
 }

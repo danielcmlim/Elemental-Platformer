@@ -22,6 +22,33 @@ public class Main implements ApplicationListener {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10f), true);
 
+        // Add collision listener for spike detection
+        world.setContactListener(new ContactListener() {
+            @Override
+            public void beginContact(Contact contact) {
+                Fixture fa = contact.getFixtureA();
+                Fixture fb = contact.getFixtureB();
+
+                if (fa.getUserData() == null || fb.getUserData() == null)
+                    return;
+
+                // Check if player hit spike
+                if ((fa.getUserData().equals("player") && fb.getUserData().equals("spike")) ||
+                    (fa.getUserData().equals("spike") && fb.getUserData().equals("player"))) {
+                    player.die();
+                }
+            }
+
+            @Override
+            public void endContact(Contact contact) {}
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {}
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {}
+        });
+
         level = new LevelGenerator(world);
         float spawnX = 10 + 32;
         float spawnY = 140 + 32;
@@ -53,6 +80,7 @@ public class Main implements ApplicationListener {
     public void dispose() {
         batch.dispose();
         level.dispose();
+        player.dispose();
         music.dispose();
         world.dispose();
     }
