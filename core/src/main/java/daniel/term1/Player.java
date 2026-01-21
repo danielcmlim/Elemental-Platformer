@@ -154,6 +154,7 @@ public class Player {
         return isDead;
     }
 
+
     public void dispose() {
         idleSheet.dispose();
         runSheet.dispose();
