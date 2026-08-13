@@ -1,5 +1,7 @@
 # ElementalPlatformer
 
+A physics-based platformer where players navigate challenging levels, avoid deadly hazards, and use momentum, jumps, and environmental mechanics to survive.
+
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
 This project was generated with a template including simple application launchers and an empty `ApplicationListener` implementation.
