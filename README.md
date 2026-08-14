@@ -1,6 +1,7 @@
 # ElementalPlatformer
 
-tldr; A physics-based platformer where players navigate challenging levels, avoid deadly hazards, and use momentum, jumps, and environmental mechanics to survive.
+**TLDR:** 
+A physics-based platformer where players navigate challenging levels, avoid deadly hazards, and use momentum, jumps, and environmental mechanics to survive.
 
 **Empathize:**
 To make a 2D platformer that challenges players to focus on problem-solving combined with platforming skills
@@ -12,11 +13,13 @@ Hollow Knight: A Combination of enemies and overall movement fluidity.
 
 **Target Audience:**
 Players aged 9–16 who enjoy puzzles and adventure games.
+
 **Define:**
 I want to create a game where the player can switch between Fire, Water, Air, and Earth forms. Each element has strengths and weaknesses, and different hazards are in effect based on the element you are
 Water: Swim through water; can’t touch lava
 Earth: Move heavy objects; unable to jump, and is slow
 Air: Double-jump/glide; can be blown away
+
 **Controls:**
 Arrow keys move left, move right, jump, duck
 1–4 → switch elements
