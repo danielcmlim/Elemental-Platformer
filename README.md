@@ -1,4 +1,4 @@
-# ElementalPlatformer
+# Elemental Platformer
 
 **TLDR:** 
 A physics-based platformer where players navigate challenging levels, avoid deadly hazards, use movement and environmental mechanics to survive.
