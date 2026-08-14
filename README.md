@@ -1,7 +1,7 @@
 # Elemental Platformer
 
 **TLDR:** 
-A physics-based platformer where players navigate challenging levels, avoid deadly hazards, use movement and environmental mechanics to survive.
+A physics-based platformer where players navigate challenging levels, avoid deadly hazards and use movement and environmental mechanics to survive.
 
 **Empathize:**
 To make a 2D platformer that challenges players to focus on problem-solving combined with platforming skills
