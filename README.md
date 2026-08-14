@@ -24,7 +24,8 @@ Air: Double-jump/glide; can be blown away
 Arrow keys move left, move right, jump, duck
 1–4 → switch elements
 Start at the bottom-left door, finish at the top-right door
-First setting:
+
+**Setting:**
 In an old, ancient temple, where you find/collect orbs that give you different abilities.
 The obstacles in this setting could be poison dart traps, rolling balls like Indiana Jones, and spikes
 
