@@ -12,7 +12,7 @@ To make a 2D platformer that challenges players to focus on problem-solving comb
 - Hollow Knight: A Combination of enemies and overall movement fluidity.
 
 **Target Audience:**
-Players aged 9–16 who enjoy puzzles and adventure games.
+Players aged 12+ who enjoy puzzles and adventure games.
 
 **Define:**
 I want to create a game where the player can switch between Fire, Water, Air and Earth forms. Each element has strengths and weaknesses, and different hazards are in effect based on the element you are:
