@@ -27,7 +27,7 @@ I want to create a game where the player can switch between Fire, Water, Air and
 
 **Setting:**
 In an old, ancient temple, where you find/collect orbs that give you different abilities.
-The obstacles in this setting could be poison dart traps, rolling balls like Indiana Jones, and spikes
+The obstacles in this setting could be poison dart traps, rolling boulders (est: Indiana Jones) and spikes
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
