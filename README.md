@@ -29,6 +29,7 @@ I want to create a game where the player can switch between Fire, Water, Air and
 In an old, ancient temple, where you find/collect orbs that give you different abilities.
 The obstacles in this setting could be poison dart traps, rolling boulders (est: Indiana Jones) and spikes
 
+# libGDX
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
 This project was generated with a template including simple application launchers and an empty `ApplicationListener` implementation.
