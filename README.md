@@ -2,55 +2,56 @@
 
 <img src="platformer%20ss1.png" alt="Elemental Platformer Gameplay" width="500">
 
-**TLDR:** A physics-based 2D platformer where players switch between elemental forms to overcome environmental hazards, solve puzzles, and navigate challenging levels.
+**TLDR:** A physics-based 2D platformer where players navigate challenging levels, avoid environmental hazards, and use movement and environmental mechanics to survive.
 
 **Empathize:**
-I wanted to create a platformer that combines responsive movement with problem-solving, requiring players to understand each element's strengths and weaknesses to progress through each level.
+I wanted to create a platformer that combines responsive movement with problem-solving, requiring players to carefully navigate hazards and use the environment to progress through each level.
 
 **Research / Inspiration:**
 
-- **Fireboy and Watergirl:** Inspired by its elemental mechanics, environmental puzzles, and simple timing-based gameplay.
-- **King of Thieves:** Inspired by its responsive movement and platforming mechanics.
-- **Hollow Knight:** Inspired by its fluid movement, challenging environments, and combination of platforming and enemies.
+- **Fireboy and Watergirl:** Inspired by its puzzle-focused platforming and simple timing mechanics.
+- **King of Thieves:** Inspired by its responsive movement and platforming controls.
+- **Hollow Knight:** Inspired by its fluid movement, challenging environments, and combination of exploration and combat.
 
 **Target Audience:**
 Players aged 12+ who enjoy platforming, puzzle-solving, and adventure games.
 
 **Define:**
-I wanted to create a game where players can switch between **Fire, Water, Air, and Earth** forms. Each element has unique abilities and weaknesses, meaning players must choose the appropriate form to overcome different obstacles and environmental hazards.
-
-**Elemental Mechanics:**
-
-- **Water:** Can swim through water but cannot touch lava.
-- **Earth:** Can move heavy objects but is unable to jump and moves slowly.
-- **Air:** Can double-jump and glide but can be pushed around by strong wind.
-- **Fire:** Designed to interact with fire-based environments and hazards.
+I wanted to create a game where players navigate an ancient temple filled with obstacles and environmental hazards. The level design focuses on movement, timing, and problem-solving, requiring players to carefully navigate each section and avoid deadly traps.
 
 **Gameplay / Features:**
 
-- Four elemental forms with unique abilities and weaknesses.
-- Element switching to solve environmental puzzles.
-- Physics-based movement and platforming.
-- Environmental hazards that interact differently with each element.
-- Challenging platforming sections requiring precise movement.
-- Puzzle-solving based on elemental abilities.
-- Collectible elemental orbs that unlock different abilities.
-- Multiple environmental hazards, including spikes, poison darts, and rolling boulders.
+- Physics-based 2D platforming.
+- Challenging levels focused on movement and timing.
+- Environmental hazards that require careful navigation.
+- Multiple obstacles and traps.
+- Responsive movement and jumping mechanics.
+- Exploration-based level design.
+- Ancient temple environment.
 
 **Controls:**
 
-- `A / →D` — Move left / right
+- `A / D` — Move left / right
 - `W` — Jump
+
 
 **Level Objective:**
 
-Players start at the **bottom-left door** and must navigate through the temple to reach the **top-right door** while using the correct elemental form to overcome obstacles and hazards.
+Players start at the **bottom-left door** and must navigate through the temple to reach the **top-right door**, avoiding hazards and overcoming obstacles along the way.
 
 **Setting:**
 
-An ancient temple filled with hidden pathways, environmental puzzles, and dangerous traps. Players explore the temple and collect elemental orbs that allow them to access and switch between different abilities.
+An ancient temple filled with hidden pathways, environmental puzzles, and dangerous traps. The environment features hazards such as **poison dart traps, rolling boulders, and spikes**, requiring players to carefully plan their movements and react to obstacles.
 
-The temple contains hazards such as **poison dart traps, rolling boulders, and spikes**, requiring players to carefully plan their movements and choose the appropriate elemental form.
+## Future Improvements
+
+- Introduce elemental forms such as **Fire, Water, Air, and Earth**.
+- Give each element unique abilities and weaknesses.
+- Add elemental puzzles and environmental interactions.
+- Introduce collectible elemental orbs.
+- Expand the temple with additional levels and challenges.
+
+  
 # libGDX
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
