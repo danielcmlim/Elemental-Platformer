@@ -31,8 +31,8 @@ I wanted to create a game where players navigate an ancient temple filled with o
 
 **Controls:**
 
-- `A / D` — Move left / right
-- `W` — Jump
+- `A / D` Move left / right
+- `W`  Jump
 
 
 **Level Objective:**
