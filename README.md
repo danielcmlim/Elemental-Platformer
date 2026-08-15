@@ -1,34 +1,56 @@
 # Elemental Platformer
 
-**TLDR:** 
-A physics-based platformer where players navigate challenging levels, avoid deadly hazards and use movement and environmental mechanics to survive.
+<img src="platformer%20ss1.png" alt="Elemental Platformer Gameplay" width="500">
+
+**TLDR:** A physics-based 2D platformer where players switch between elemental forms to overcome environmental hazards, solve puzzles, and navigate challenging levels.
 
 **Empathize:**
-To make a 2D platformer that challenges players to focus on problem-solving combined with platforming skills
+I wanted to create a platformer that combines responsive movement with problem-solving, requiring players to understand each element's strengths and weaknesses to progress through each level.
 
 **Research / Inspiration:**
-- Fireboy and Watergirl: Love the elemental-style puzzles and simple timing mechanics.
-- King of Thieves: Like the smooth platforming and responsive jumping controls.
-- Hollow Knight: A Combination of enemies and overall movement fluidity.
+
+- **Fireboy and Watergirl:** Inspired by its elemental mechanics, environmental puzzles, and simple timing-based gameplay.
+- **King of Thieves:** Inspired by its responsive movement and platforming mechanics.
+- **Hollow Knight:** Inspired by its fluid movement, challenging environments, and combination of platforming and enemies.
 
 **Target Audience:**
-Players aged 12+ who enjoy puzzles and adventure games.
+Players aged 12+ who enjoy platforming, puzzle-solving, and adventure games.
 
 **Define:**
-I want to create a game where the player can switch between Fire, Water, Air and Earth forms. Each element has strengths and weaknesses and different hazards are in effect based on the element you are:
-- Water: Swim through water; can’t touch lava
-- Earth: Move heavy objects; unable to jump, and is slow
-- Air: Double-jump/glide; can be blown away
+I wanted to create a game where players can switch between **Fire, Water, Air, and Earth** forms. Each element has unique abilities and weaknesses, meaning players must choose the appropriate form to overcome different obstacles and environmental hazards.
+
+**Elemental Mechanics:**
+
+- **Water:** Can swim through water but cannot touch lava.
+- **Earth:** Can move heavy objects but is unable to jump and moves slowly.
+- **Air:** Can double-jump and glide but can be pushed around by strong wind.
+- **Fire:** Designed to interact with fire-based environments and hazards.
+
+**Gameplay / Features:**
+
+- Four elemental forms with unique abilities and weaknesses.
+- Element switching to solve environmental puzzles.
+- Physics-based movement and platforming.
+- Environmental hazards that interact differently with each element.
+- Challenging platforming sections requiring precise movement.
+- Puzzle-solving based on elemental abilities.
+- Collectible elemental orbs that unlock different abilities.
+- Multiple environmental hazards, including spikes, poison darts, and rolling boulders.
 
 **Controls:**
-- Arrow keys move left, move right, jump, duck
-- Numbers 1–4 → switch elements
-- Start at the bottom-left door, finish at the top-right door
+
+- `A / →D` — Move left / right
+- `W` — Jump
+
+**Level Objective:**
+
+Players start at the **bottom-left door** and must navigate through the temple to reach the **top-right door** while using the correct elemental form to overcome obstacles and hazards.
 
 **Setting:**
-In an old, ancient temple, where you find/collect orbs that give you different abilities.
-The obstacles in this setting could be poison dart traps, rolling boulders (est: Indiana Jones) and spikes
 
+An ancient temple filled with hidden pathways, environmental puzzles, and dangerous traps. Players explore the temple and collect elemental orbs that allow them to access and switch between different abilities.
+
+The temple contains hazards such as **poison dart traps, rolling boulders, and spikes**, requiring players to carefully plan their movements and choose the appropriate elemental form.
 # libGDX
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
