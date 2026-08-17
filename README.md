@@ -27,7 +27,7 @@ Players navigate each level while avoiding hazards and moving across platforms. 
 
 ## Technologies
 
-- Java
+- [Java](https://www.java.com/)
 - Object-oriented programming
 - Collision detection
 - Physics-based movement
