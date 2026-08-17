@@ -39,3 +39,11 @@ Players navigate each level while avoiding hazards and moving across platforms. 
 - Designing platforming levels
 - Managing game objects with object-oriented programming
 - Debugging movement and gameplay interactions
+
+ ## Inspiration
+
+The project draws inspiration from:
+
+- **Celeste** — precise platforming movement, timing-based challenges and level progression
+- **Super Mario Bros.** — accessible platforming mechanics and clear level navigation
+- **Hollow Knight** — environmental atmosphere, hazards and exploration-focused level design
