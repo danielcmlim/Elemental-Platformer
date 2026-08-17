@@ -1,86 +1,41 @@
 # Elemental Platformer
 
-<img src="platformer%20ss1.png" alt="Elemental Platformer Gameplay" width="500">
+<p align="center">
+  <img src="platformer%20ss1.png" alt="Gameplay screenshot from Elemental Platformer" width="700">
+</p>
 
-**TLDR:** A physics-based 2D platformer where players navigate challenging levels, avoid environmental hazards, and use movement and environmental mechanics to survive.
+A physics-based Java platformer focused on responsive player movement, environmental hazards and challenging level design.
 
-**Empathize:**
-I wanted to create a platformer that combines responsive movement with problem-solving, requiring players to carefully navigate hazards and use the environment to progress through each level.
+## Overview
 
-**Research / Inspiration:**
+This project is a 2D platformer where players navigate levels by controlling movement, avoiding hazards and using precise timing to progress.
 
-- **Fireboy and Watergirl:** Inspired by its puzzle-focused platforming and simple timing mechanics.
-- **King of Thieves:** Inspired by its responsive movement and platforming controls.
-- **Hollow Knight:** Inspired by its fluid movement, challenging environments, and combination of exploration and combat.
+The game focuses on responsive platforming mechanics and levels that become progressively more challenging.
 
-**Target Audience:**
-Players aged 12+ who enjoy platforming, puzzle-solving, and adventure games.
+## Features
 
-**Define:**
-I wanted to create a game where players navigate an ancient temple filled with obstacles and environmental hazards. The level design focuses on movement, timing, and problem-solving, requiring players to carefully navigate each section and avoid deadly traps.
+- Physics-based player movement
+- Platforming and jumping mechanics
+- Environmental hazards
+- Multi-level gameplay
+- Progressively challenging level design
+- Collision detection
 
-**Gameplay / Features:**
+## Gameplay
 
-- Physics-based 2D platforming.
-- Challenging levels focused on movement and timing.
-- Environmental hazards that require careful navigation.
-- Multiple obstacles and traps.
-- Responsive movement and jumping mechanics.
-- Exploration-based level design.
-- Ancient temple environment.
+Players navigate each level while avoiding hazards and moving across platforms. Progress depends on accurate movement, timing and understanding each level layout.
 
-**Controls:**
+## Technologies
 
-- `A / D` Move left / right
-- `W`  Jump
+- Java
+- Object-oriented programming
+- Collision detection
+- Physics-based movement
 
+## What I Learned
 
-**Level Objective:**
-
-Players start at the **bottom-left door** and must navigate through the temple to reach the **top-right door**, avoiding hazards and overcoming obstacles along the way.
-
-**Setting:**
-
-An ancient temple filled with hidden pathways, environmental puzzles, and dangerous traps. The environment features hazards such as **poison dart traps, rolling boulders, and spikes**, requiring players to carefully plan their movements and react to obstacles.
-
-## Future Improvements
-
-- Introduce elemental forms such as **Fire, Water, Air, and Earth**.
-- Give each element unique abilities and weaknesses.
-- Add elemental puzzles and environmental interactions.
-- Introduce collectible elemental orbs.
-- Expand the temple with additional levels and challenges.
-
-  
-# libGDX
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
-
-This project was generated with a template including simple application launchers and an empty `ApplicationListener` implementation.
-
-## Platforms
-
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
-
-## Gradle
-
-This project uses [Gradle](https://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
-
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
-
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+- Building player movement and jumping mechanics
+- Implementing collision detection
+- Designing platforming levels
+- Managing game objects with object-oriented programming
+- Debugging movement and gameplay interactions
