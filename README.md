@@ -4,11 +4,11 @@
   <img src="platformer%20ss1.png" alt="Gameplay screenshot from Elemental Platformer" width="700">
 </p>
 
-A physics-based platformer built with **Java** and **libGDX**. Navigate challenging levels, avoid environmental hazards and use precise movement and timing to progress.
+A physics-based platformer built with **Java** and **libGDX**. Navigate and avoid environmental hazards and use precise movement and timing to progress.
 
 ## Overview
 
-The game challenges players to navigate levels using responsive movement and jumping mechanics while avoiding environmental hazards. Levels become progressively more challenging and require players to adapt their movement and timing.
+The game challenges players to navigate the map using responsive movement and jumping mechanics while avoiding environmental hazards. Levels become progressively more challenging and require players to adapt their movement and timing.
 
 ## Features
 
@@ -24,7 +24,6 @@ The game challenges players to navigate levels using responsive movement and jum
 - **Responsive movement**: Focused on responsive player controls so movement and jumping feel consistent and give the player precise control.
 - **Environmental hazards**: Added hazards to make players consider their movement and timing rather than simply moving through each level.
 - **Collision detection**: Used collision detection to determine interactions between the player, platforms and hazards and create consistent gameplay behaviour.
-- **Progressive difficulty**: Designed levels to become increasingly challenging so players can gradually develop their understanding of the movement mechanics.
 
 ## Controls
 
