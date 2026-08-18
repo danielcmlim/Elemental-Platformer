@@ -8,9 +8,9 @@ A physics-based Java platformer focused on responsive player movement, environme
 
 ## Overview
 
-This project is a 2D platformer where players navigate levels by controlling movement, avoiding hazards and using precise timing to progress.
+This project is a 2D platformer where players navigate the map by controlling movement, avoiding hazards and using precise timing to progress.
 
-The game focuses on responsive platforming mechanics and levels that become progressively more challenging.
+The game focuses on responsive platforming mechanics.
 
 ## Features
 
@@ -21,9 +21,15 @@ The game focuses on responsive platforming mechanics and levels that become prog
 - Progressively challenging level design
 - Collision detection
 
+## Design Decisions
+
+- **Responsive movement**: Focused on responsive player controls so movement and jumping feel consistent and give the player precise control.
+- **Environmental hazards**: Added hazards to make players consider their movement and timing rather than simply moving through each level.
+- **Collision detection**: Used collision detection to determine interactions between the player, platforms and hazards and create consistent gameplay behaviour.
+
 ## Gameplay
 
-Players navigate each level while avoiding hazards and moving across platforms. Progress depends on accurate movement, timing and understanding each level layout.
+Players navigate while avoiding hazards and moving across platforms. Progress depends on accurate movement, timing and understanding each level layout.
 
 ## Technologies
 
@@ -40,10 +46,10 @@ Players navigate each level while avoiding hazards and moving across platforms. 
 - Managing game objects with object-oriented programming
 - Debugging movement and gameplay interactions
 
- ## Inspiration
+## Inspiration
 
 The project draws inspiration from:
 
-- **Celeste** — precise platforming movement, timing-based challenges and level progression
-- **Super Mario Bros.** — accessible platforming mechanics and clear level navigation
-- **Hollow Knight** — environmental atmosphere, hazards and exploration-focused level design
+- **Celeste** - Precise platforming movement, timing-based challenges and level progression
+- **Super Mario Bros.** - Accessible platforming mechanics and clear level navigation
+- **Hollow Knight** - Environmental atmosphere, hazards and exploration-focused level design
