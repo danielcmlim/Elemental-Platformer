@@ -4,13 +4,11 @@
   <img src="platformer%20ss1.png" alt="Gameplay screenshot from Elemental Platformer" width="700">
 </p>
 
-A physics-based Java platformer focused on responsive player movement, environmental hazards and challenging level design.
+A physics-based platformer built with **Java** and **libGDX**. Navigate challenging levels, avoid environmental hazards and use precise movement and timing to progress.
 
 ## Overview
 
-This project is a 2D platformer where players navigate the map by controlling movement, avoiding hazards and using precise timing to progress.
-
-The game focuses on responsive platforming mechanics.
+The game challenges players to navigate levels using responsive movement and jumping mechanics while avoiding environmental hazards. Levels become progressively more challenging and require players to adapt their movement and timing.
 
 ## Features
 
@@ -26,17 +24,23 @@ The game focuses on responsive platforming mechanics.
 - **Responsive movement**: Focused on responsive player controls so movement and jumping feel consistent and give the player precise control.
 - **Environmental hazards**: Added hazards to make players consider their movement and timing rather than simply moving through each level.
 - **Collision detection**: Used collision detection to determine interactions between the player, platforms and hazards and create consistent gameplay behaviour.
+- **Progressive difficulty**: Designed levels to become increasingly challenging so players can gradually develop their understanding of the movement mechanics.
 
-## Gameplay
+## Controls
 
-Players navigate while avoiding hazards and moving across platforms. Progress depends on accurate movement, timing and understanding each level layout.
+| Key | Action |
+|---|---|
+| `A / D` | Move left / right |
+| `W / Space` | Jump |
+| `R` | Restart level |
+| `Esc` | Pause / Menu |
 
 ## Technologies
 
 - [Java](https://www.java.com/)
-- Object-oriented programming
-- Collision detection
-- Physics-based movement
+- [libGDX](https://libgdx.com/)
+- [Gradle](https://gradle.org/)
+- [LWJGL3](https://www.lwjgl.org/)
 
 ## What I Learned
 
@@ -45,6 +49,42 @@ Players navigate while avoiding hazards and moving across platforms. Progress de
 - Designing platforming levels
 - Managing game objects with object-oriented programming
 - Debugging movement and gameplay interactions
+
+## Running the Project
+
+### Requirements
+
+- Java Development Kit (JDK)
+- Git
+- No separate Gradle installation is required because the project includes the Gradle wrapper.
+
+### Run on desktop
+
+From the project root:
+
+    # macOS / Linux
+    ./gradlew lwjgl3:run
+
+    # Windows
+    gradlew.bat lwjgl3:run
+
+### Build a runnable JAR
+
+    # macOS / Linux
+    ./gradlew lwjgl3:jar
+
+    # Windows
+    gradlew.bat lwjgl3:jar
+
+The generated JAR will be placed in:
+
+    lwjgl3/build/libs
+
+## Project Structure
+
+- `core` - Shared game logic, entities, screens and gameplay systems
+- `lwjgl3` - Desktop launcher built with LWJGL3
+- `assets` - Game assets such as sprites and other resources
 
 ## Inspiration
 
